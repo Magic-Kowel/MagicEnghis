@@ -1,0 +1,1 @@
+export const randomEnglish = () =>  Boolean(Math.floor(Math.random() * 2));
