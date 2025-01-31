@@ -33,7 +33,26 @@ function App() {
             </Suspense>
           }
         />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path={`/`}
+          element={
+            <Suspense fallback={<Loader />}>
+              <Menu>
+                <IrregularsVerbs />
+              </Menu>
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Menu>
+                <NotFound />
+              </Menu>
+            </Suspense>
+          }
+        />
       </Routes>
     </>
   );

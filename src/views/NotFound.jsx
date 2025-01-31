@@ -1,6 +1,6 @@
 import { Container, Grid, Typography, Box } from "@mui/material";
-import ErrorIcon from "@mui/icons-material/Error";
-import Footer from "../components/Footer";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+
 function NotFound() {
   return (
     <>
@@ -20,14 +20,16 @@ function NotFound() {
             justifyContent="center"
             alignItems="center"
           >
-            <Grid item md={2} sm={12}>
+            <Grid item sm={12}>
               <Box
                 mt={20}
                 sx={{
                   textAlign: "center",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                <ErrorIcon
+                <ErrorOutlineIcon
                   sx={{
                     fontSize: "10rem",
                   }}
@@ -40,7 +42,6 @@ function NotFound() {
           </Grid>
         </Container>
       </Box>
-      <Footer />
     </>
   );
 }

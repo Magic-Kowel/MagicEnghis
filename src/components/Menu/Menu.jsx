@@ -140,7 +140,7 @@ export default function Menu({ children }) {
           <DrawerHeader />
           <Box
             sx={{
-              marginBottom: 5,
+              // marginBottom: 5,
               minHeight: "calc(100vh - 180px)", // Altura mínima para llenar el espacio disponible
               //  paddingBottom: '100px', // Ajusta el padding inferior para dejar espacio para el pie de página
             }}
