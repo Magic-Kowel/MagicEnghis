@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
 import { verbsIrregularsList } from "../db/verbsIrregularsList";
-import { Box, Typography, Button, TextField, Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  TextField,
+  Grid,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { randomIndex } from "../tools/randomIndex";
 import DataTable from "../components/DataTable/DataTable";
+import StackTable from "../components/DataTable/StackTable";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import Swal from "sweetalert2";
+import Title from "../components/Title";
 const getRandomProperty = (obj) => {
   const keys = Object.keys(obj).filter((key) => key !== "translation");
   const randomKey = keys[Math.floor(Math.random() * keys.length)];
@@ -17,6 +27,8 @@ const IrregularsVerbs = () => {
   const [text, setText] = useState("");
   const [search, setSearch] = useState("");
   const [listFilter, setListFilter] = useState("");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   useEffect(() => {
     handleRandom();
   }, []);
@@ -69,7 +81,7 @@ const IrregularsVerbs = () => {
           <>
             <Grid item xs={12}>
               <Box sx={{ textAlign: "center" }}>
-                <Typography variant="h2">Escribe la traducción</Typography>
+                <Title title="Escribe la traducción" />
               </Box>
             </Grid>
             <Grid item xs={12}>
@@ -118,11 +130,29 @@ const IrregularsVerbs = () => {
               />
             </Grid>
             <Grid item marginX={2} xs={12}>
-              <DataTable
-                listTitles={["Infinitive", "Past", "Participle"]}
-                listKeys={["infinitive", "past", "participle"]}
-                dataList={listFilter}
-              />
+              {!isMobile ? (
+                <DataTable
+                  listTitles={[
+                    "Traducción",
+                    "Infinitive",
+                    "Past",
+                    "Participle",
+                  ]}
+                  listKeys={["translation", "infinitive", "past", "participle"]}
+                  dataList={listFilter}
+                />
+              ) : (
+                <StackTable
+                  listTitles={[
+                    "Traducción",
+                    "Infinitive",
+                    "Past",
+                    "Participle",
+                  ]}
+                  listKeys={["translation", "infinitive", "past", "participle"]}
+                  dataList={listFilter}
+                />
+              )}
             </Grid>
           </>
         )}

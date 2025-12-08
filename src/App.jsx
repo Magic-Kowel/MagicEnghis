@@ -6,6 +6,7 @@ import MainWriteScreen from "./views/MainWriteScreen.jsx";
 const Menu = lazy(() => import("./components/Menu/Menu.jsx"));
 const NotFound = lazy(() => import("./views/NotFound.jsx"));
 const IrregularsVerbs = lazy(() => import("./views/IrregularsVerbs.jsx"));
+const Vs = lazy(() => import("./views/Vs.jsx"));
 // list path
 import { listPathMemorizeWords } from "./pathList.js";
 function App() {
@@ -33,6 +34,16 @@ function App() {
             </Suspense>
           }
         />
+        <Route
+          path="/vs"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Menu>
+                <Vs />
+              </Menu>
+            </Suspense>
+          }
+        ></Route>
         <Route
           path={`/`}
           element={

@@ -4,6 +4,7 @@ import { Box, Button, Typography, TextField, Grid } from "@mui/material";
 import { randomEnglish } from "../tools/randomEnglish"; // Asegúrate de que este helper esté definido
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
+import Title from "../components/Title";
 
 function WriteMemoryScreen({ dataList }) {
   const [text, setText] = useState("");
@@ -51,12 +52,13 @@ function WriteMemoryScreen({ dataList }) {
   return (
     <Grid
       container
+      padding={2}
       spacing={2}
       sx={{ justifyContent: "center", alignItems: "center", height: "100vh" }}
     >
       <Grid item xs={12}>
         <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h4">Escribe la traducción</Typography>
+          <Title title="Escribe la traducción" />
         </Box>
       </Grid>
       <Grid item xs={12} md={6}>

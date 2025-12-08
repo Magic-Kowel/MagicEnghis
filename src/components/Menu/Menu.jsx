@@ -134,6 +134,7 @@ export default function Menu({ children }) {
           <List>
             <ItemMenu name="Memorize words" items={listPathMemorizeWords} />
             <ItemMenu name="Irregulars verbs" items={["irregularsverbs"]} />
+            <ItemMenu name="VS" items={["vs"]} />
           </List>
         </Drawer>
         <Main open={open}>
@@ -141,8 +142,9 @@ export default function Menu({ children }) {
           <Box
             sx={{
               // marginBottom: 5,
-              minHeight: "calc(100vh - 180px)", // Altura mínima para llenar el espacio disponible
+              // minHeight: "calc(100vh - 180px)", // Altura mínima para llenar el espacio disponible
               //  paddingBottom: '100px', // Ajusta el padding inferior para dejar espacio para el pie de página
+              minHeight: "100dvh",
             }}
           >
             {children}
