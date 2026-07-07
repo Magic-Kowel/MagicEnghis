@@ -52,7 +52,9 @@ const IrregularsVerbs = () => {
     setRandomProperty(property);
   };
   const handleValidate = () => {
-    const result = verbsIrregularsList[randomIndexList][randomProperty].toLowerCase() == text.toLowerCase();
+    const result =
+      verbsIrregularsList[randomIndexList][randomProperty].toLowerCase() ==
+      text.toLowerCase();
     Swal.fire({
       icon: result ? "success" : "error",
       title: result ? "¡Correcto!" : "Incorrecto",
@@ -68,7 +70,12 @@ const IrregularsVerbs = () => {
       <Grid
         container
         spacing={2}
-        sx={{ justifyContent: "center", alignItems: "center", height: "100vh" }}
+        direction="row"
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100svh",
+        }}
       >
         <Grid item ml={4} xs={12}>
           <Button
@@ -94,6 +101,27 @@ const IrregularsVerbs = () => {
                 </Typography>
                 <Typography>{randomProperty}</Typography>
               </Box>
+            </Grid>
+            <Grid
+              container
+              justifyContent="flex-end"
+              marginX="30%"
+              item
+              xs={12}
+              md={12}
+              lg={12}
+            >
+              <Grid item xs={12} sm={2} md={1} lg={1}>
+                <Box sx={{ textAlign: "center", marginX: 2 }}>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    onClick={() => handleRandom()}
+                  >
+                    Next
+                  </Button>
+                </Box>
+              </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
               <Box sx={{ textAlign: "center", marginX: 2 }}>
