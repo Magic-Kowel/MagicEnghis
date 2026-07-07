@@ -20,6 +20,19 @@ const getRandomProperty = (obj) => {
   const randomKey = keys[Math.floor(Math.random() * keys.length)];
   return randomKey;
 };
+
+const LearnButton = ({ isLearn, setIsLearn }) => {
+  return (
+    <>
+      <Button
+        variant={isLearn ? "contained" : "outlined"}
+        startIcon={<FitnessCenterIcon />}
+        onClick={() => setIsLearn((prev) => !prev)}
+      ></Button>
+    </>
+  );
+};
+
 const IrregularsVerbs = () => {
   const [randomIndexList, setRandomIndexList] = useState(0);
   const [randomProperty, setRandomProperty] = useState("infinitive");
@@ -85,11 +98,7 @@ const IrregularsVerbs = () => {
               </Box>
             </Grid>
             <Grid item ml={4} xs={12}>
-              <Button
-                variant={isLearn ? "contained" : "outlined"}
-                startIcon={<FitnessCenterIcon />}
-                onClick={() => setIsLearn((prev) => !prev)}
-              ></Button>
+              <LearnButton isLearn={isLearn} setIsLearn={setIsLearn} />
             </Grid>
             <Grid item xs={12}>
               <Box sx={{ textAlign: "center" }}>
@@ -149,6 +158,9 @@ const IrregularsVerbs = () => {
           </>
         ) : (
           <>
+            <Grid item ml={4} xs={12} mt={2}>
+              <LearnButton isLearn={isLearn} setIsLearn={setIsLearn} />
+            </Grid>
             <Grid item marginX={2} xs={12}>
               <TextField
                 fullWidth
