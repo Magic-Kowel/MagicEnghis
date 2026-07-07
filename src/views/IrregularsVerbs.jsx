@@ -52,7 +52,7 @@ const IrregularsVerbs = () => {
     setRandomProperty(property);
   };
   const handleValidate = () => {
-    const result = verbsIrregularsList[randomIndexList][randomProperty] == text;
+    const result = verbsIrregularsList[randomIndexList][randomProperty].toLowerCase() == text.toLowerCase();
     Swal.fire({
       icon: result ? "success" : "error",
       title: result ? "¡Correcto!" : "Incorrecto",
