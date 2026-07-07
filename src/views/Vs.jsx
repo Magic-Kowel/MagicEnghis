@@ -1,7 +1,7 @@
 import { vsList } from "../db/vsList";
 import { randomIndex } from "../tools/randomIndex";
 import { useEffect, useState } from "react";
-import { Grid, Box, Typography, Card, Button } from "@mui/material";
+import { Grid, Box, Typography, Card, Button, TextField } from "@mui/material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import Title from "../components/Title";
 import { colors } from "../stylesConfig";
@@ -9,9 +9,21 @@ import DataTableCollapse from "../components/DataTable/DataTableCollapse";
 function Vs() {
   const [randomIndexList, setRandomIndexList] = useState(0);
   const [isLearn, setIsLearn] = useState(false);
+  const [search, setSearch] = useState("");
+  const [listFilter, setListFilter] = useState("");
   useEffect(() => {
     handleRandom();
   }, []);
+  useEffect(() => {
+    const result =
+      vsList.filter((item) => {
+        return (
+          item?.title?.toLowerCase().includes(search.toLowerCase()) ||
+          item?.terms.word?.toLowerCase().includes(search.toLowerCase())
+        );
+      }) || [];
+    setListFilter(result.length === 0 ? vsList : result);
+  }, [search]);
   const handleRandom = () => {
     const index = randomIndex(vsList);
     setRandomIndexList(index);
@@ -22,7 +34,11 @@ function Vs() {
       <Grid
         container
         spacing={2}
-        sx={{ justifyContent: "center", alignItems: "center", height: "100vh" }}
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100svh",
+        }}
       >
         <Grid item ml={4} xs={12}>
           <Button
@@ -47,9 +63,31 @@ function Vs() {
             </Grid>
             <Grid
               container
+              justifyContent="flex-end"
+              marginX="30%"
+              item
+              xs={12}
+              md={12}
+              lg={12}
+            >
+              <Grid item xs={12} sm={2} md={1} lg={1}>
+                <Box sx={{ textAlign: "center", marginX: 2 }}>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    onClick={() => handleRandom()}
+                  >
+                    Next
+                  </Button>
+                </Box>
+              </Grid>
+            </Grid>
+            <Grid
+              container
               spacing={2}
               marginX={2}
               marginTop="2rem"
+              marginBottom="1rem"
               flexDirection="row"
             >
               {vsList[randomIndexList].terms.map((item, index) => (
@@ -83,10 +121,19 @@ function Vs() {
           </>
         ) : (
           <>
+            <Grid item marginX={2} xs={12}>
+              <TextField
+                fullWidth
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                autoComplete="off"
+                type="search"
+              />
+            </Grid>
             <DataTableCollapse
               titleMain="title"
               collapseItem="terms"
-              dataList={vsList}
+              dataList={listFilter}
               listTitles={["Palabra", "Significado", "Ejemplo"]}
               listKeys={["word", "meaning", "example"]}
             />
