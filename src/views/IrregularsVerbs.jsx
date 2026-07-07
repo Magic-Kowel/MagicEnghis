@@ -77,19 +77,19 @@ const IrregularsVerbs = () => {
           height: "100svh",
         }}
       >
-        <Grid item ml={4} xs={12}>
-          <Button
-            variant={isLearn ? "contained" : "outlined"}
-            startIcon={<FitnessCenterIcon />}
-            onClick={() => setIsLearn((prev) => !prev)}
-          ></Button>
-        </Grid>
         {!isLearn ? (
           <>
             <Grid item xs={12}>
               <Box sx={{ textAlign: "center" }}>
                 <Title title="Escribe la traducción" />
               </Box>
+            </Grid>
+            <Grid item ml={4} xs={12}>
+              <Button
+                variant={isLearn ? "contained" : "outlined"}
+                startIcon={<FitnessCenterIcon />}
+                onClick={() => setIsLearn((prev) => !prev)}
+              ></Button>
             </Grid>
             <Grid item xs={12}>
               <Box sx={{ textAlign: "center" }}>
