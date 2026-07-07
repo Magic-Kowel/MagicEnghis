@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { verbsIrregularsList } from "../db/verbsIrregularsList";
+import { LearnButton } from "../components/bootons/LearnButton";
 import {
   Box,
   Typography,
@@ -12,26 +13,13 @@ import {
 import { randomIndex } from "../tools/randomIndex";
 import DataTable from "../components/DataTable/DataTable";
 import StackTable from "../components/DataTable/StackTable";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import Swal from "sweetalert2";
 import Title from "../components/Title";
-import PropTypes from "prop-types";
+
 const getRandomProperty = (obj) => {
   const keys = Object.keys(obj).filter((key) => key !== "translation");
   const randomKey = keys[Math.floor(Math.random() * keys.length)];
   return randomKey;
-};
-
-const LearnButton = ({ isLearn, setIsLearn }) => {
-  return (
-    <>
-      <Button
-        variant={isLearn ? "contained" : "outlined"}
-        startIcon={<FitnessCenterIcon />}
-        onClick={() => setIsLearn((prev) => !prev)}
-      ></Button>
-    </>
-  );
 };
 
 const IrregularsVerbs = () => {
@@ -203,8 +191,3 @@ const IrregularsVerbs = () => {
 };
 
 export default IrregularsVerbs;
-
-LearnButton.propTypes = {
-  isLearn: PropTypes.bool.isRequired,
-  setIsLearn: PropTypes.func.isRequired
-};

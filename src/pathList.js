@@ -1,7 +1,23 @@
 export const listPathMemorizeWords = [
-    "daysWeeks",
-    "familyMembers",
-    "fruits",
-    "months",
-    "seasons",
+    {
+        path: "daysWeeks",
+        title: "days Weeks"
+    },
+    {
+
+        path: "familyMembers",
+        title: "family Members"
+    },
+    {
+        path: "fruits",
+        title: "fruits"
+    },
+    {
+        path: "months",
+        title: "months"
+    },
+    {
+        path: "seasons",
+        title: "seasons"
+    }
 ]

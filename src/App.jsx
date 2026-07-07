@@ -15,8 +15,8 @@ function App() {
       <Routes>
         {listPathMemorizeWords.map((path) => (
           <Route
-            key={path}
-            path={`/${path}`}
+            key={path.path}
+            path={`/${path.path}`}
             element={
               <Menu>
                 <MainWriteScreen />

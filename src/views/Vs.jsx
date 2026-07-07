@@ -2,10 +2,10 @@ import { vsList } from "../db/vsList";
 import { randomIndex } from "../tools/randomIndex";
 import { useEffect, useState } from "react";
 import { Grid, Box, Typography, Card, Button, TextField } from "@mui/material";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import Title from "../components/Title";
 import { colors } from "../stylesConfig";
 import DataTableCollapse from "../components/DataTable/DataTableCollapse";
+import { LearnButton } from "../components/bootons/LearnButton";
 function Vs() {
   const [randomIndexList, setRandomIndexList] = useState(0);
   const [isLearn, setIsLearn] = useState(false);
@@ -40,13 +40,6 @@ function Vs() {
           height: "100svh",
         }}
       >
-        <Grid item ml={4} xs={12}>
-          <Button
-            variant={isLearn ? "contained" : "outlined"}
-            startIcon={<FitnessCenterIcon />}
-            onClick={() => setIsLearn((prev) => !prev)}
-          ></Button>
-        </Grid>
         {!isLearn ? (
           <>
             <Grid item xs={12}>
@@ -60,6 +53,9 @@ function Vs() {
                   {vsList[randomIndexList].title}
                 </Typography>
               </Box>
+            </Grid>
+            <Grid item ml={4} xs={12}>
+              <LearnButton isLearn={isLearn} setIsLearn={setIsLearn} />
             </Grid>
             <Grid
               container
@@ -121,6 +117,9 @@ function Vs() {
           </>
         ) : (
           <>
+            <Grid item ml={4} mt={1} xs={12}>
+              <LearnButton isLearn={isLearn} setIsLearn={setIsLearn} />
+            </Grid>
             <Grid item marginX={2} xs={12}>
               <TextField
                 fullWidth

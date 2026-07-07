@@ -29,10 +29,10 @@ function ItemMenu({ name, items }) {
             <AccordionDetails sx={{ width: "100%" }}>
               {items?.map((item) => (
                 <ListItemButton
-                  onClick={() => handleNavigateMenu(item)}
-                  key={item}
+                  onClick={() => handleNavigateMenu(item.path)}
+                  key={item.path}
                 >
-                  <ListItemText primary={item} />
+                  <ListItemText primary={item.title} />
                 </ListItemButton>
               ))}
             </AccordionDetails>
