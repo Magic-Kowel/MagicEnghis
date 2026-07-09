@@ -15,6 +15,7 @@ import DataTable from "../components/DataTable/DataTable";
 import StackTable from "../components/DataTable/StackTable";
 import Swal from "sweetalert2";
 import Title from "../components/Title";
+import VirtualKeyboard from "../components/VirtualKeyboard";
 
 const getRandomProperty = (obj) => {
   const keys = Object.keys(obj).filter((key) => key !== "translation");
@@ -121,7 +122,7 @@ const IrregularsVerbs = () => {
                 </Box>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={12} md={12} lg={6}>
               <Box sx={{ textAlign: "center", marginX: 2 }}>
                 <TextField
                   fullWidth
@@ -143,6 +144,7 @@ const IrregularsVerbs = () => {
                   Validar
                 </Button>
               </Box>
+              <VirtualKeyboard setText={setText} />
             </Grid>
           </>
         ) : (
