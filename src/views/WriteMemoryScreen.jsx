@@ -5,6 +5,7 @@ import { randomEnglish } from "../tools/randomEnglish"; // Asegúrate de que est
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
 import Title from "../components/Title";
+import VirtualKeyboard from "../components/VirtualKeyboard";
 
 function WriteMemoryScreen({ dataList }) {
   const [text, setText] = useState("");
@@ -50,47 +51,50 @@ function WriteMemoryScreen({ dataList }) {
   }, [dataList]);
 
   return (
-    <Grid
-      container
-      padding={2}
-      spacing={2}
-      sx={{ justifyContent: "center", alignItems: "center", height: "100vh" }}
-    >
-      <Grid item xs={12}>
-        <Box sx={{ textAlign: "center" }}>
-          <Title title="Escribe la traducción" />
-        </Box>
+    <>
+      <Grid
+        container
+        padding={2}
+        spacing={2}
+        sx={{ justifyContent: "center", alignItems: "center", height: "100vh" }}
+      >
+        <Grid item xs={12}>
+          <Box sx={{ textAlign: "center" }}>
+            <Title title="Escribe la traducción" />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h5" sx={{ textAlign: "center", mb: 2 }}>
+            {isEnglish
+              ? dataList[randomIndex]?.english
+              : dataList[randomIndex]?.spanish}
+          </Typography>
+          <TextField
+            label="Traducción"
+            variant="outlined"
+            autoComplete="off"
+            fullWidth
+            value={text}
+            margin="dense"
+            onChange={(e) => setText(e.target.value)}
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                handleValidate();
+              }
+            }}
+          />
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{ mt: 2 }}
+            onClick={handleValidate}
+          >
+            Validar
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item xs={12} md={6}>
-        <Typography variant="h5" sx={{ textAlign: "center", mb: 2 }}>
-          {isEnglish
-            ? dataList[randomIndex]?.english
-            : dataList[randomIndex]?.spanish}
-        </Typography>
-        <TextField
-          label="Traducción"
-          variant="outlined"
-          autoComplete="off"
-          fullWidth
-          value={text}
-          margin="dense"
-          onChange={(e) => setText(e.target.value)}
-          onKeyUp={(e) => {
-            if (e.key === "Enter") {
-              handleValidate();
-            }
-          }}
-        />
-        <Button
-          fullWidth
-          variant="contained"
-          sx={{ mt: 2 }}
-          onClick={handleValidate}
-        >
-          Validar
-        </Button>
-      </Grid>
-    </Grid>
+      <VirtualKeyboard setText={setText} />
+    </>
   );
 }
 
@@ -99,7 +103,7 @@ WriteMemoryScreen.propTypes = {
     PropTypes.shape({
       english: PropTypes.string.isRequired,
       spanish: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
 };
 
