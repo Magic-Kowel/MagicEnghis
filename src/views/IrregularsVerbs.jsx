@@ -132,12 +132,14 @@ const IrregularsVerbs = () => {
                   {verbsIrregularsList[indexList].translation}
                 </Typography>
                 <Typography>{randomProperty}</Typography>
-                <Chip
-                  label={`Level ${level + 1}`}
-                  variant="filled"
-                  color="primary"
-                  size="small"
-                />
+                {MODE.LEVEL === mode && (
+                  <Chip
+                    label={`Level ${level + 1}`}
+                    variant="filled"
+                    color="primary"
+                    size="small"
+                  />
+                )}
               </Box>
             </Grid>
             {MODE.RANDOM === mode && (
@@ -166,6 +168,7 @@ const IrregularsVerbs = () => {
             <Grid item xs={12} sm={12} md={12} lg={6}>
               <Box sx={{ textAlign: "center", marginX: 2 }}>
                 <TextField
+                  label="Traducción"
                   fullWidth
                   value={text}
                   onChange={(event) => setText(event.target.value)}
@@ -196,6 +199,7 @@ const IrregularsVerbs = () => {
             <Grid item marginX={2} xs={12}>
               <TextField
                 fullWidth
+                label="Buscar"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 autoComplete="off"

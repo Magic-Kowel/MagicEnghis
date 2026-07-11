@@ -6,11 +6,13 @@ import Title from "../components/Title";
 import { colors } from "../stylesConfig";
 import DataTableCollapse from "../components/DataTable/DataTableCollapse";
 import { LearnButton } from "../components/bootons/LearnButton";
+import SplitButton from "../components/bootons/SplitButton";
 function Vs() {
   const [randomIndexList, setRandomIndexList] = useState(0);
   const [isLearn, setIsLearn] = useState(false);
   const [search, setSearch] = useState("");
   const [listFilter, setListFilter] = useState("");
+  const [level, setLevel] = useState("A2");
   useEffect(() => {
     handleRandom();
   }, []);
@@ -25,9 +27,10 @@ function Vs() {
     setListFilter(result.length === 0 ? vsList : result);
   }, [search]);
   const handleRandom = () => {
-    const index = randomIndex(vsList);
+    const filterList = vsList.filter((item)=>item.difficulty === level)
+    const index = randomIndex(filterList);
     setRandomIndexList(index);
-    console.log(vsList[randomIndexList]);
+    console.log(filterList[randomIndexList]);
   };
   return (
     <>
@@ -65,17 +68,23 @@ function Vs() {
               xs={12}
               md={12}
               lg={12}
+              spacing={2}
             >
-              <Grid item xs={12} sm={2} md={1} lg={1}>
-                <Box sx={{ textAlign: "center", marginX: 2 }}>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    onClick={() => handleRandom()}
-                  >
-                    Next
-                  </Button>
-                </Box>
+              <Grid item xs={12} sm={2} md={1} lg={4}>
+                <SplitButton
+                  options={["A2", "A2-B1", "B1", "B1-B2", "B2", "B2-C1"]}
+                  getValue={setLevel}
+                  handle={handleRandom}
+                />
+              </Grid>
+              <Grid item xs={12} sm={2} md={1} lg={2}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  onClick={() => handleRandom()}
+                >
+                  Next
+                </Button>
               </Grid>
             </Grid>
             <Grid
@@ -88,9 +97,14 @@ function Vs() {
             >
               {vsList[randomIndexList].terms.map((item, index) => (
                 <>
-                  <Grid item xs={12} md={6} lg={6}>
+                  <Grid
+                    item
+                    key={`${item.word}-${index}`}
+                    xs={12}
+                    md={6}
+                    lg={6}
+                  >
                     <Card
-                      key={`${item.word}-${index}`}
                       sx={{
                         border: 1,
                         borderColor: colors.primaryColor,
@@ -135,6 +149,7 @@ function Vs() {
                 onChange={(event) => setSearch(event.target.value)}
                 autoComplete="off"
                 type="search"
+                label="Buscar"
               />
             </Grid>
             <DataTableCollapse

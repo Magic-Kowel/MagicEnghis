@@ -130,6 +130,7 @@ function WriteMemoryScreen({ dataList }) {
             <Grid item marginX={2} xs={12}>
               <TextField
                 fullWidth
+                label="Buscar"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 autoComplete="off"
