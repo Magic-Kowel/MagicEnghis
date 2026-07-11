@@ -109,6 +109,14 @@ function Vs() {
                       >
                         {item.meaning}
                       </Typography>
+                      <Typography
+                        gutterBottom
+                        margin={2}
+                        textAlign="center"
+                        sx={{ fontSize: "1.5rem" }}
+                      >
+                        {item.word}
+                      </Typography>
                     </Card>
                   </Grid>
                 </>
