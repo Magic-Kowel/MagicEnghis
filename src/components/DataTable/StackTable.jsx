@@ -18,7 +18,8 @@ function StackTable({ listTitles, listKeys, dataList, listButtons, id }) {
             boxShadow: 5,
             marginTop: "0.5rem",
             width: "100%",
-            overflow: "hidden",
+            maxHeight: "80svh",
+            overflow: "scroll",
             paddingTop: "0.5rem",
           }}
         >
