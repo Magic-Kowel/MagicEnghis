@@ -131,7 +131,9 @@ const IrregularsVerbs = () => {
                 <Typography variant="h4">
                   {verbsIrregularsList[indexList].translation}
                 </Typography>
-                <Typography>{randomProperty}</Typography>
+                <Typography>
+                  Escribiré el verbo en <Chip label={randomProperty}></Chip>
+                </Typography>
                 {MODE.LEVEL === mode && (
                   <Chip
                     label={`Level ${level + 1}`}

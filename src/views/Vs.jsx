@@ -1,18 +1,29 @@
 import { vsList } from "../db/vsList";
 import { randomIndex } from "../tools/randomIndex";
 import { useEffect, useState } from "react";
-import { Grid, Box, Typography, Card, Button, TextField } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Typography,
+  Card,
+  Button,
+  TextField,
+  CardActions,
+  CardContent,
+} from "@mui/material";
 import Title from "../components/Title";
 import { colors } from "../stylesConfig";
 import DataTableCollapse from "../components/DataTable/DataTableCollapse";
 import { LearnButton } from "../components/bootons/LearnButton";
 import SplitButton from "../components/bootons/SplitButton";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 function Vs() {
   const [randomIndexList, setRandomIndexList] = useState(0);
   const [isLearn, setIsLearn] = useState(false);
   const [search, setSearch] = useState("");
   const [listFilter, setListFilter] = useState("");
   const [level, setLevel] = useState("A2");
+  const [learnMode, setLearnMode] = useState(false);
   useEffect(() => {
     handleRandom();
   }, []);
@@ -27,7 +38,7 @@ function Vs() {
     setListFilter(result.length === 0 ? vsList : result);
   }, [search]);
   const handleRandom = () => {
-    const filterList = vsList.filter((item)=>item.difficulty === level)
+    const filterList = vsList.filter((item) => item.difficulty === level);
     const index = randomIndex(filterList);
     setRandomIndexList(index);
     console.log(filterList[randomIndexList]);
@@ -115,22 +126,56 @@ function Vs() {
                         textAlign: "center",
                       }}
                     >
-                      <Typography
-                        gutterBottom
-                        margin={5}
-                        textAlign="center"
-                        sx={{ fontSize: "2rem" }}
-                      >
-                        {item.meaning}
-                      </Typography>
-                      <Typography
-                        gutterBottom
-                        margin={2}
-                        textAlign="center"
-                        sx={{ fontSize: "1.5rem" }}
-                      >
-                        {item.word}
-                      </Typography>
+                      <CardContent>
+                        {learnMode ? (
+                          <>
+                            <Typography
+                              gutterBottom
+                              margin={5}
+                              textAlign="center"
+                              sx={{ fontSize: "2rem" }}
+                            >
+                              {vsList[randomIndexList].difference}
+                            </Typography>
+                            <Typography
+                              gutterBottom
+                              margin={2}
+                              textAlign="center"
+                              sx={{ fontSize: "1.5rem" }}
+                            >
+                              {vsList[randomIndexList].correct_usage}
+                            </Typography>
+                          </>
+                        ) : (
+                          <>
+                            <Typography
+                              gutterBottom
+                              margin={5}
+                              textAlign="center"
+                              sx={{ fontSize: "2rem" }}
+                            >
+                              {item.meaning}
+                            </Typography>
+                            <Typography
+                              gutterBottom
+                              margin={2}
+                              textAlign="center"
+                              sx={{ fontSize: "1.5rem" }}
+                            >
+                              {item.word}
+                            </Typography>
+                          </>
+                        )}
+                      </CardContent>
+                      <CardActions>
+                        <Button
+                          size="small"
+                          variant="contained"
+                          onClick={() => setLearnMode((prev) => !prev)}
+                        >
+                          <ChangeCircleIcon />
+                        </Button>
+                      </CardActions>
                     </Card>
                   </Grid>
                 </>
