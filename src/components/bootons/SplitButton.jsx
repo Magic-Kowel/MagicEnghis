@@ -9,10 +9,10 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import PropTypes from "prop-types";
-export default function SplitButton({ options = [], getValue, handle }) {
+export default function SplitButton({ options = [], getValue, handle, index }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(index);
 
   const handleClick = () => {
     console.info(`You clicked ${options[selectedIndex]}`);
@@ -49,7 +49,7 @@ export default function SplitButton({ options = [], getValue, handle }) {
           size="small"
           aria-controls={open ? "split-button-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
-          aria-label="select merge strategy"
+          aria-label="select"
           aria-haspopup="menu"
           onClick={handleToggle}
         >
@@ -97,4 +97,5 @@ SplitButton.propTypes = {
   options: PropTypes.array.isRequired,
   getValue: PropTypes.func.isRequired,
   handle: PropTypes.func.isRequired,
+  index: PropTypes.number
 };

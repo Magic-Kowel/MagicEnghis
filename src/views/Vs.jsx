@@ -23,7 +23,7 @@ function Vs() {
   const [search, setSearch] = useState("");
   const [listFilter, setListFilter] = useState("");
   const [level, setLevel] = useState("A2");
-  const [learnMode, setLearnMode] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(null);
   useEffect(() => {
     handleRandom();
   }, []);
@@ -43,6 +43,9 @@ function Vs() {
     setRandomIndexList(index);
     console.log(filterList[randomIndexList]);
   };
+  const handleSwitchCard = (index) => {
+    setSelectedIndex(index);
+  };
   return (
     <>
       <Grid
@@ -52,6 +55,8 @@ function Vs() {
           justifyContent: "center",
           alignItems: "center",
           height: "100svh",
+          maxHeight: "100svh",
+          overflow: "auto",
         }}
       >
         {!isLearn ? (
@@ -86,6 +91,7 @@ function Vs() {
                   options={["A2", "A2-B1", "B1", "B1-B2", "B2", "B2-C1"]}
                   getValue={setLevel}
                   handle={handleRandom}
+                  index={0}
                 />
               </Grid>
               <Grid item xs={12} sm={2} md={1} lg={2}>
@@ -127,7 +133,7 @@ function Vs() {
                       }}
                     >
                       <CardContent>
-                        {learnMode ? (
+                        {selectedIndex === index ? (
                           <>
                             <Typography
                               gutterBottom
@@ -171,7 +177,7 @@ function Vs() {
                         <Button
                           size="small"
                           variant="contained"
-                          onClick={() => setLearnMode((prev) => !prev)}
+                          onClick={() => handleSwitchCard(index)}
                         >
                           <ChangeCircleIcon />
                         </Button>

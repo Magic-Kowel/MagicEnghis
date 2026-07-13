@@ -132,7 +132,11 @@ const IrregularsVerbs = () => {
                   {verbsIrregularsList[indexList].translation}
                 </Typography>
                 <Typography>
-                  Escribiré el verbo en <Chip label={randomProperty}></Chip>
+                  Escribiré el verbo en{" "}
+                  <Chip
+                    sx={{ fontWeight: "bold" }}
+                    label={randomProperty}
+                  ></Chip>
                 </Typography>
                 {MODE.LEVEL === mode && (
                   <Chip
