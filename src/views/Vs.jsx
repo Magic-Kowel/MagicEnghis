@@ -23,7 +23,7 @@ function Vs() {
   const [search, setSearch] = useState("");
   const [listFilter, setListFilter] = useState("");
   const [level, setLevel] = useState("A2");
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState([]);
   useEffect(() => {
     handleRandom();
   }, []);
@@ -44,7 +44,11 @@ function Vs() {
     console.log(filterList[randomIndexList]);
   };
   const handleSwitchCard = (index) => {
-    setSelectedIndex(index);
+    if (selectedIndex.includes(index)) {
+      setSelectedIndex(selectedIndex.filter(item => item !== index));
+    } else {
+      setSelectedIndex([...selectedIndex, index]);
+    }
   };
   return (
     <>
@@ -133,7 +137,7 @@ function Vs() {
                       }}
                     >
                       <CardContent>
-                        {selectedIndex === index ? (
+                        {selectedIndex.includes(index) ? (
                           <>
                             <Typography
                               gutterBottom

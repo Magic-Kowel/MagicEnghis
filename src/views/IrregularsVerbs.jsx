@@ -20,7 +20,9 @@ import Title from "../components/Title";
 import VirtualKeyboard from "../components/VirtualKeyboard";
 
 const getRandomProperty = (obj) => {
-  const keys = Object.keys(obj).filter((key) => key !== "translation");
+  const keys = Object.keys(obj).filter(
+    (key) => key !== "translation" && key !== "difficulty",
+  );
   const randomKey = keys[Math.floor(Math.random() * keys.length)];
   return randomKey;
 };
@@ -38,6 +40,7 @@ const IrregularsVerbs = () => {
   const [listFilter, setListFilter] = useState("");
   const [mode, setMode] = useState(MODE.LEVEL);
   const [level, setLevel] = useState(0);
+  const [levelLearn, setLevelLearn] = useState("All");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   useEffect(() => {
@@ -47,15 +50,23 @@ const IrregularsVerbs = () => {
   useEffect(() => {
     const result =
       verbsIrregularsList.filter((item) => {
-        return (
+        // 1. Condición de búsqueda (coincide con cualquiera de las columnas)
+        const matchesSearch =
           item.infinitive.toLowerCase().includes(search.toLowerCase()) ||
           item.participle.toLowerCase().includes(search.toLowerCase()) ||
           item.past.toLowerCase().includes(search.toLowerCase()) ||
-          item.translation.toLowerCase().includes(search.toLowerCase())
-        );
+          item.translation.toLowerCase().includes(search.toLowerCase());
+
+        // 2. Condición de nivel (si es "All" pasa siempre, si no, debe coincidir exactamente)
+        const matchesLevel =
+          levelLearn === "All" ||
+          item.difficulty.toLowerCase() === levelLearn.toLowerCase();
+
+        // El elemento se queda si cumple la búsqueda Y cumple el nivel
+        return matchesSearch && matchesLevel;
       }) || [];
     setListFilter(result.length === 0 ? verbsIrregularsList : result);
-  }, [search]);
+  }, [search, levelLearn]);
   function handleModeGame(result) {
     let nextLevel = level;
     if (mode === MODE.LEVEL) {
@@ -128,7 +139,7 @@ const IrregularsVerbs = () => {
                 <Typography variant="h3">
                   {verbsIrregularsList[indexList].infinitive}
                 </Typography>
-                <Typography variant="h4">
+                <Typography variant="h6">
                   {verbsIrregularsList[indexList].translation}
                 </Typography>
                 <Typography>
@@ -210,6 +221,28 @@ const IrregularsVerbs = () => {
                 onChange={(event) => setSearch(event.target.value)}
                 autoComplete="off"
               />
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                marginTop="1.5rem"
+              >
+                <ButtonGroup variant="outlined" aria-label="Options difficulty">
+                  {["Easy", "Medium", "Hard", "All"].map((item, index) => (
+                    <Button
+                      key={index}
+                      onClick={() => setLevelLearn(item)}
+                      variant={
+                        levelLearn?.toLowerCase() === item?.toLowerCase()
+                          ? "contained"
+                          : "outlined"
+                      }
+                    >
+                      {item}
+                    </Button>
+                  ))}
+                </ButtonGroup>
+              </Box>
             </Grid>
             <Grid item marginX={2} xs={12}>
               {!isMobile ? (

@@ -1,19 +1,20 @@
 import { Box, Button } from "@mui/material";
 import PropTypes from "prop-types";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 export default function VirtualKeyboard({ setText }) {
   // Distribución de filas del teclado alfabético
   const rows = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
-    ["Z", "X", "C", "V", "B", "N", "M"],
+    ["Z", "X", "C", "V", "B", "N", "M", "clear"],
   ];
 
   const handleKeyPress = (letter) => {
+    if(letter === "clear"){
+      setText((prev) => prev.slice(0, -1));
+      return;
+    }
     setText((prev) => prev + letter);
-  };
-
-  const handleBackspace = () => {
-    setText((prev) => prev.slice(0, -1));
   };
 
   return (
@@ -78,24 +79,13 @@ export default function VirtualKeyboard({ setText }) {
                     backgroundColor: "#f5f5f5", // Evita el estado hover molesto en móviles
                   },
                 }}
+                startIcon={letter === "clear" && <KeyboardBackspaceIcon />}
               >
-                {letter}
+                {letter === "clear" ? "" : letter}
               </Button>
             ))}
           </Box>
         ))}
-
-        {/* Fila extra para el botón de borrar (opcional, pero útil) */}
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 0.5 }}>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={handleBackspace}
-            sx={{ width: "40%", textTransform: "none", fontWeight: "bold" }}
-          >
-            clear
-          </Button>
-        </Box>
       </Box>
     </Box>
   );

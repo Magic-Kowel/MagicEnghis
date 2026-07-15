@@ -23,15 +23,22 @@ function DataTableCollapse({
   listKeys,
   listTitles,
 }) {
-  const [open, setOpen] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState([]);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(event.target.value);
     setPage(0);
+  };
+  const handleOpen = (index) => {
+    if (selectedIndex.includes(index)) {
+      setSelectedIndex(selectedIndex.filter((item) => item !== index));
+    } else {
+      setSelectedIndex([...selectedIndex, index]);
+    }
   };
   return (
     <>
@@ -54,9 +61,9 @@ function DataTableCollapse({
                       <IconButton
                         aria-label="expand row"
                         size="small"
-                        onClick={() => setOpen(!open)}
+                        onClick={() => handleOpen(index)}
                       >
-                        {open ? (
+                        {selectedIndex.includes(index) ? (
                           <KeyboardArrowUpIcon />
                         ) : (
                           <KeyboardArrowDownIcon />
@@ -79,7 +86,11 @@ function DataTableCollapse({
                       style={{ paddingBottom: 0, paddingTop: 0 }}
                       colSpan={6}
                     >
-                      <Collapse in={open} timeout="auto" unmountOnExit>
+                      <Collapse
+                        in={selectedIndex.includes(index)}
+                        timeout="auto"
+                        unmountOnExit
+                      >
                         <Box sx={{ display: "flex", flexDirection: "column" }}>
                           <Typography
                             margin={1.2}
