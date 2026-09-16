@@ -37,7 +37,7 @@ function PrepositionsPlace() {
         }}
       >
         {/* Título de la sección */}
-        <Grid item xs={12}>
+        <Grid item="true" xs={12}>
           <Box sx={{ textAlign: "center", mb: 2 }}>
             <Title title="Selecciona la opción correcta" />
           </Box>
@@ -45,7 +45,7 @@ function PrepositionsPlace() {
 
         {/* Palabra a adivinar (Flashcard visual) */}
         <Grid
-          item
+          item="true"
           xs={12}
           md={6}
           lg={4}
@@ -74,7 +74,7 @@ function PrepositionsPlace() {
 
         {/* Opciones de respuesta */}
         <Grid
-          item
+          item="true"
           xs={12}
           md={6}
           lg={4}
