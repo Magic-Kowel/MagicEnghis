@@ -10,7 +10,7 @@ function NotFound() {
           margin: 0,
           padding: 0,
           background:
-            "linear-gradient(90deg, rgba(255,0,155,1) 0%, rgba(136,84,222,1) 45%, rgba(0,212,255,1) 100%);",
+            "linear-gradient(90deg, rgba(255,0,155,1) 0%, rgba(136,84,222,1) 45%, rgba(0,212,255,1) 100%)",
         }}
       >
         <Container maxWidth="xl">
@@ -20,7 +20,8 @@ function NotFound() {
             justifyContent="center"
             alignItems="center"
           >
-            <Grid item sm={12}>
+            {/* Se reemplazó item sm={12} por size={{ sm: 12 }} o simplemente size={12} */}
+            <Grid size={12}>
               <Box
                 mt={20}
                 sx={{
@@ -45,4 +46,5 @@ function NotFound() {
     </>
   );
 }
+
 export default NotFound;
