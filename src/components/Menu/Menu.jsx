@@ -135,6 +135,7 @@ export default function Menu({ children }) {
             <ItemMenu name="Memorize words" items={listPathMemorizeWords} />
             <ItemMenu name="Irregulars verbs" items={["irregularsverbs"]} />
             <ItemMenu name="VS" items={["vs"]} />
+            <ItemMenu name="Prepositions place" items={["prepositionsplace"]} />
           </List>
         </Drawer>
         <Main open={open}>

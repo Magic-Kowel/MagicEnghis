@@ -7,6 +7,7 @@ const Menu = lazy(() => import("./components/Menu/Menu.jsx"));
 const NotFound = lazy(() => import("./views/NotFound.jsx"));
 const IrregularsVerbs = lazy(() => import("./views/IrregularsVerbs.jsx"));
 const Vs = lazy(() => import("./views/Vs.jsx"));
+const PrepositionsPlace = lazy(() => import("./views/PrepositionsPlace.jsx"));
 // list path
 import { listPathMemorizeWords } from "./pathList.js";
 function App() {
@@ -44,6 +45,16 @@ function App() {
             </Suspense>
           }
         ></Route>
+        <Route
+          path={`/prepositionsplace`}
+          element={
+            <Suspense fallback={<Loader />}>
+              <Menu>
+                <PrepositionsPlace />
+              </Menu>
+            </Suspense>
+          }
+        />
         <Route
           path={`/`}
           element={

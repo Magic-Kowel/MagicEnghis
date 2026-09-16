@@ -85,6 +85,7 @@ const IrregularsVerbs = () => {
     setIndexList(mode === MODE.LEVEL ? nextLevel : index);
     const property = getRandomProperty(verbsIrregularsList[index]);
     setRandomProperty(property);
+
   };
   const handleValidate = () => {
     const result =
@@ -146,7 +147,8 @@ const IrregularsVerbs = () => {
                   Escribiré el verbo en{" "}
                   <Chip
                     sx={{ fontWeight: "bold" }}
-                    label={randomProperty}
+                    label={randomProperty.toUpperCase()}
+                    color="primary"
                   ></Chip>
                 </Typography>
                 {MODE.LEVEL === mode && (
