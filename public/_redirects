@@ -1,0 +1,5 @@
+# Excluir el archivo robots.txt para que Netlify lo sirva directamente
+/robots.txt  /robots.txt  200
+
+# Redirigir todas las demás rutas a la aplicación de React
+/*  /index.html  200
